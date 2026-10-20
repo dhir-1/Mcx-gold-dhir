@@ -59,7 +59,6 @@ pytest -v tests/test_core.py
 ```bash
 streamlit run streamlit/app.py
 ```
-*(Or alternatively from the root: `streamlit run app.py`)*
 Open your browser at `http://localhost:8501`.
 
 ### 4. Interactive Research Walkthrough
@@ -82,7 +81,6 @@ MCX GOLD/
 │   └── backtest_simple.py     # Pairs trading backtest engine and performance logger
 ├── tests/
 │   └── test_core.py           # Pytest test suite for core calculations and logic
-├── app.py                     # Root launcher for Streamlit dashboard
 ├── core.py                    # Calculation and analytical core logic (no Streamlit code)
 ├── requirements.txt           # Project dependencies
 ├── data/                      # Raw daily Bhavcopy CSV files
