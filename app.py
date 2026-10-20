@@ -5,6 +5,16 @@ Run with: streamlit run app.py
 """
 
 import os
+import sys
+
+# Ensure repository root is on sys.path whether run from root or inside subdirectories
+_CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+_PARENT_DIR = os.path.abspath(os.path.join(_CURRENT_DIR, ".."))
+if _PARENT_DIR not in sys.path:
+    sys.path.insert(0, _PARENT_DIR)
+if _CURRENT_DIR not in sys.path:
+    sys.path.insert(0, _CURRENT_DIR)
+
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -476,7 +486,7 @@ with tabs[3]:
         )
 
         st.markdown("---")
-        chart_img_path = "results_bt/strategy_vs_gold.png"
+        chart_img_path = core._resolve_data_path("results_bt/strategy_vs_gold.png")
         if os.path.exists(chart_img_path):
             st.image(
                 chart_img_path,

@@ -57,16 +57,24 @@ pytest -v tests/test_core.py
 
 ### 3. Launch Dashboard
 ```bash
-streamlit run app.py
+streamlit run streamlit/app.py
 ```
+*(Or alternatively from the root: `streamlit run app.py`)*
 Open your browser at `http://localhost:8501`.
+
+### 4. Interactive Research Walkthrough
+Open **`walkthrough.ipynb`** directly on GitHub or in Jupyter/VS Code for the complete step-by-step narrative with pre-rendered interactive charts and analysis tables.
 
 ---
 
 ## Project Structure
 ```text
 MCX GOLD/
-├── app.py                     # Streamlit web dashboard user interface
+├── walkthrough.ipynb          # Master research walkthrough notebook (all charts & analysis)
+├── streamlit/                 # Dedicated interactive dashboard folder
+│   ├── app.py                 # Streamlit web dashboard user interface
+│   └── README.md              # Dashboard guide and feature documentation
+├── app.py                     # Root launcher for Streamlit dashboard
 ├── core.py                    # Calculation and analytical core logic (no Streamlit code)
 ├── preprocess.py              # Cleaning and normalization pipeline for MCX Bhavcopy data
 ├── analyze_gaps.py            # Gap distribution and statistical evaluation script

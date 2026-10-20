@@ -162,8 +162,19 @@ def determine_signal(
 # -----------------------------------------------------------------------------
 # DATA LOADERS (Safe, read-only, non-crashing)
 # -----------------------------------------------------------------------------
+def _resolve_data_path(filepath: str) -> str:
+    """Resolve file path relative to repo root if not found in current directory."""
+    if os.path.exists(filepath):
+        return filepath
+    alt = os.path.join(os.path.dirname(os.path.abspath(__file__)), filepath)
+    if os.path.exists(alt):
+        return alt
+    return filepath
+
+
 def load_clean_data(filepath: str = "out/gold_futures_clean.csv") -> pd.DataFrame:
     """Load cleaned gold futures data with date parsing and traded filtering."""
+    filepath = _resolve_data_path(filepath)
     if not os.path.exists(filepath):
         return pd.DataFrame()
 
@@ -194,6 +205,7 @@ def load_clean_data(filepath: str = "out/gold_futures_clean.csv") -> pd.DataFram
 
 def load_ddr_data(filepath: str = "results_ddr/ddr.csv") -> pd.DataFrame:
     """Load MCX Due Date Rate final settlement reference table."""
+    filepath = _resolve_data_path(filepath)
     if not os.path.exists(filepath):
         return pd.DataFrame()
     df = pd.read_csv(filepath)
@@ -204,6 +216,7 @@ def load_ddr_data(filepath: str = "results_ddr/ddr.csv") -> pd.DataFrame:
 
 def load_trades_data(filepath: str = "results_bt/trades.csv") -> pd.DataFrame:
     """Load backtest trade records."""
+    filepath = _resolve_data_path(filepath)
     if not os.path.exists(filepath):
         return pd.DataFrame()
     df = pd.read_csv(filepath)
