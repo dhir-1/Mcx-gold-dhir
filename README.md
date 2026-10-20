@@ -74,16 +74,17 @@ MCX GOLD/
 ├── streamlit/                 # Dedicated interactive dashboard folder
 │   ├── app.py                 # Streamlit web dashboard user interface
 │   └── README.md              # Dashboard guide and feature documentation
-├── app.py                     # Root launcher for Streamlit dashboard
-├── core.py                    # Calculation and analytical core logic (no Streamlit code)
-├── preprocess.py              # Cleaning and normalization pipeline for MCX Bhavcopy data
-├── analyze_gaps.py            # Gap distribution and statistical evaluation script
-├── backtest_simple.py         # Pairs trading backtest engine and performance logger
-├── ddr_check.py               # Due Date Rate (DDR) settlement convergence analysis
-├── goldm_check.py             # GOLDM reference interpolation and gap validation
-├── requirements.txt           # Project dependencies
+├── scripts/                   # Individual standalone pipeline & analysis scripts
+│   ├── preprocess.py          # Bhavcopy data ingestion and cleaning pipeline
+│   ├── analyze_gaps.py        # Gap distribution and statistical evaluation script
+│   ├── goldm_check.py         # GOLDM reference interpolation & proxy validation
+│   ├── ddr_check.py           # Due Date Rate (DDR) settlement convergence analysis
+│   └── backtest_simple.py     # Pairs trading backtest engine and performance logger
 ├── tests/
 │   └── test_core.py           # Pytest test suite for core calculations and logic
+├── app.py                     # Root launcher for Streamlit dashboard
+├── core.py                    # Calculation and analytical core logic (no Streamlit code)
+├── requirements.txt           # Project dependencies
 ├── data/                      # Raw daily Bhavcopy CSV files
 ├── out/
 │   └── gold_futures_clean.csv # Cleaned, normalized dataset
