@@ -95,9 +95,7 @@ MCX GOLD/
 │   ├── trades.csv             # Backtest trade log output
 │   └── strategy_vs_gold.png   # Cumulative strategy performance chart
 ├── results_goldm/             # GOLDM reference analysis artifacts
-├── slide_assets/              # Visual diagrams and presentation assets
-└── docs/
-    └── screenshots/           # UI screenshots directory (tracked via .gitkeep)
+└── slide_assets/              # Visual diagrams and presentation assets
 ```
 
 ---
@@ -106,7 +104,3 @@ MCX GOLD/
 - Daily Bhavcopy reports published by the **Multi Commodity Exchange of India (MCX)**.
 - Official **MCX Contract Specifications** for GOLDM, GOLDTEN, GOLDGUINEA, and GOLDPETAL.
 
----
-
-## Screenshots
-UI screenshots and demonstration graphics are stored in `docs/screenshots/`.
