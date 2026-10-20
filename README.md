@@ -28,9 +28,9 @@ Raw screen prices cannot be compared directly because:
 
 ## Early Findings
 *(Empirical observations from the dataset)*
-- While trading, **GOLDGUINEA** and **GOLDPETAL** cost about **0.43% more per gram** than the benchmark, on all 40 days checked.
-- At final settlement (DDR), the gap almost disappears: **GOLDGUINEA** ends at about **0.00%**, and **GOLDPETAL** within **-0.01% to -0.26%**.
-- Simple trading strategies showed **no reliable profit after assumed costs**.
+- While trading, **GOLDGUINEA** and **GOLDPETAL** cost **about 0.4% more per gram (0.39% on average across the 3 expiries, 0.43% for the 30 Oct contract)** than the benchmark.
+- The final settlement prices (DDR) of GOLDGUINEA and GOLDPETAL are within 0.00% and -0.01% to -0.26% of GOLDTEN's DDR, because they settle on the same exchange spot price. However, the last traded close was still 0.44% to 1.02% above the contract's own DDR.
+- Five simple trades over 3 expiries made a small gross profit (Rs 1,556), but fees and slippage removed it (net Rs -77). No reliable profit.
 
 ---
 

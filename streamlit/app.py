@@ -432,7 +432,7 @@ with tabs[2]:
                 "so their settlement prices are not computed the same way."
             )
             st.markdown(
-                "<div class='caption-box'><b>Takeaway:</b> The extra price paid while trading largely disappears at final settlement: GOLDGUINEA ends at about 0.00% from DDR and GOLDPETAL within about 0.01% to 0.26%.</div>",
+                "<div class='caption-box'><b>Takeaway:</b> The final settlement prices (DDR) of GOLDGUINEA and GOLDPETAL are within 0.00% and -0.01% to -0.26% of GOLDTEN's DDR, because they settle on the same exchange spot price. However, the last traded close was still 0.44% to 1.02% above the contract's own DDR.</div>",
                 unsafe_allow_html=True,
             )
 
@@ -496,7 +496,7 @@ with tabs[3]:
 
         st.warning("⚠️ **Model Caution**: Costs are assumed, sample is small (3 expiries analyzed). Past performance does not guarantee future results.")
         st.markdown(
-            "<div class='caption-box'><b>Takeaway:</b> Gross results were mixed (some trades gained, some lost) and no reliable profit remained after assumed costs. Sample is small.</div>",
+            "<div class='caption-box'><b>Takeaway:</b> Five simple trades over 3 expiries made a small gross profit (Rs 1,556), but fees and slippage removed it (net Rs -77). No reliable profit.</div>",
             unsafe_allow_html=True,
         )
 
