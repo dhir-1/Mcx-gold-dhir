@@ -1,0 +1,6 @@
+strategy,expiry,period,entry_date,exit_date,days_held,gap_at_entry,gap_at_exit,gross_pnl,fees,slippage,net_pnl_fees,net_pnl_fees_slippage,ten_price_change_pct,gold_only_pnl
+HOLD_BASELINE,2026-08-31,"descriptive, no test period",2026-08-03,2026-08-24,15,0.5391,0.3064,272.0,146.85,183.0,125.15,-57.84,13.63,19422.0
+HOLD_BASELINE,2026-09-30,"descriptive, no test period",2026-08-03,2026-09-23,37,0.6401,0.2083,603.0,145.29,177.52,457.71,280.19,5.65,8113.0
+HOLD_BASELINE,2026-10-30,"descriptive, no test period",2026-08-03,2026-10-01,43,0.8665,0.3908,669.0,145.13,176.97,523.87,346.89,3.35,4839.0
+REVERSION,2026-10-30,Design period,2026-08-31,2026-09-07,5,0.4878,0.5005,-12.0,147.77,186.26,-159.77,-346.02,-1.0,-1562.0
+REVERSION,2026-10-30,Unseen test period,2026-09-30,2026-10-01,1,0.4099,0.3908,24.0,145.69,179.01,-121.69,-300.71,0.75,1114.0
