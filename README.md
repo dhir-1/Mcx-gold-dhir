@@ -90,8 +90,7 @@ MCX GOLD/
 ├── results_bt/
 │   ├── trades.csv             # Backtest trade log output
 │   └── strategy_vs_gold.png   # Cumulative strategy performance chart
-├── results_goldm/             # GOLDM reference analysis artifacts
-└── slide_assets/              # Visual diagrams and presentation assets
+└── results_goldm/             # GOLDM reference analysis artifacts
 ```
 
 ---
