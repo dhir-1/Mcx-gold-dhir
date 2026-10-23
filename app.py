@@ -360,7 +360,7 @@ with tabs[1]:
         st.plotly_chart(fig, use_container_width=True)
 
         st.markdown(
-            f"<div class='caption-box'><b>Takeaway:</b> Tracks the percentage premium of each contract over the reference benchmark. Shaded gold ribbons illustrate the 10-day rolling normal level ± {break_even_pct}% assumed round-trip costs. Breakthroughs beyond the band indicate potential mispricings.</div>",
+            f"<div class='caption-box'><b>Takeaway:</b> Tracks the percentage premium of each contract over the reference benchmark. Shaded gold ribbons illustrate the 10-day rolling normal level ± {break_even_pct}% assumed round-trip costs. Breakthroughs beyond the band indicate unusual price gaps exceeding break-even costs.</div>",
             unsafe_allow_html=True,
         )
 
@@ -368,7 +368,7 @@ with tabs[1]:
 # TAB 3: SETTLEMENT (DDR)
 # =============================================================================
 with tabs[2]:
-    st.subheader("Settlement Convergence: Last Traded Close vs Due Date Rate (DDR)")
+    st.subheader("Settlement Price Comparison: Last Traded Close vs Due Date Rate (DDR)")
 
     if df_ddr.empty:
         st.warning("⚠️ Due Date Rate reference table `results_ddr/ddr.csv` is missing.")
@@ -419,7 +419,7 @@ with tabs[2]:
                     y="diff_pct",
                     color="expiry_date",
                     barmode="group",
-                    title="Convergence Discrepancy at Final Settlement (%)",
+                    title="Settlement Difference vs DDR (%)",
                     labels={"symbol": "Contract", "diff_pct": "Difference vs DDR (%)", "expiry_date": "Expiry"},
                     color_discrete_sequence=[core.COLOR_ACCENT_GOLD, "#2563EB"],
                 )
@@ -440,7 +440,7 @@ with tabs[2]:
 # TAB 4: BACKTEST
 # =============================================================================
 with tabs[3]:
-    st.subheader("Simple Pairs Arbitrage Backtest (GOLDTEN vs GOLDPETAL)")
+    st.subheader("Simple Pairs Trading Backtest (GOLDTEN vs GOLDPETAL)")
 
     if df_trades.empty:
         st.warning("⚠️ Backtest results file `results_bt/trades.csv` not found.")

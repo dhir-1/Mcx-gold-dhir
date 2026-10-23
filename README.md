@@ -57,7 +57,7 @@ pytest -v tests/test_core.py
 
 ### 3. Launch Dashboard
 ```bash
-streamlit run streamlit/app.py
+streamlit run app.py
 ```
 Open your browser at `http://localhost:8501`.
 
@@ -70,18 +70,16 @@ Open **`walkthrough.ipynb`** directly on GitHub or in Jupyter/VS Code for the co
 ```text
 MCX GOLD/
 ├── walkthrough.ipynb          # Master research walkthrough notebook (all charts & analysis)
-├── streamlit/                 # Dedicated interactive dashboard folder
-│   ├── app.py                 # Streamlit web dashboard user interface
-│   └── README.md              # Dashboard guide and feature documentation
+├── app.py                     # Streamlit web dashboard user interface
+├── core.py                    # Calculation and analytical core logic (no Streamlit code)
 ├── scripts/                   # Individual standalone pipeline & analysis scripts
 │   ├── preprocess.py          # Bhavcopy data ingestion and cleaning pipeline
 │   ├── analyze_gaps.py        # Gap distribution and statistical evaluation script
 │   ├── goldm_check.py         # GOLDM reference interpolation & proxy validation
-│   ├── ddr_check.py           # Due Date Rate (DDR) settlement convergence analysis
-│   └── backtest_simple.py     # Pairs trading backtest engine and performance logger
+│   ├── ddr_check.py           # Due Date Rate (DDR) settlement price comparison
+│   └── backtest_simple.py     # Contract price gap backtest engine and performance logger
 ├── tests/
 │   └── test_core.py           # Pytest test suite for core calculations and logic
-├── core.py                    # Calculation and analytical core logic (no Streamlit code)
 ├── requirements.txt           # Project dependencies
 ├── data/                      # Raw daily Bhavcopy CSV files
 ├── out/
