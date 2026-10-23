@@ -25,7 +25,7 @@ import core
 
 # -----------------------------------------------------------------------------
 # PAGE CONFIGURATION & THEME
-# Clean light theme with Gold (#C98A1B) accent and Navy (#2F4558) text.
+# Premium dark theme with Gold (#D4AF37) accent and elevated slate surfaces.
 # -----------------------------------------------------------------------------
 st.set_page_config(
     page_title="MCX Gold Futures Intelligence",
@@ -34,59 +34,157 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# Custom light styling
+# Custom dark styling
 st.markdown(
-    f"""
+    """
     <style>
-    .main {{
-        background-color: #FAFAFA;
-        color: {core.COLOR_TEXT_NAVY};
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    }}
-    h1, h2, h3, h4 {{
-        color: {core.COLOR_TEXT_NAVY};
+    /* Content container sizing and spacing */
+    .block-container {
+        max-width: 1240px;
+        padding-top: 1.8rem;
+        padding-bottom: 2.5rem;
+        padding-left: 2rem;
+        padding-right: 2rem;
+        margin: 0 auto;
+    }
+
+    /* Top header */
+    .dashboard-header {
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #2D3748;
+    }
+    .dashboard-title {
+        font-size: 2.1rem;
         font-weight: 700;
-    }}
-    .gold-pill {{
-        background-color: #FEF3C7;
-        color: #B45309;
-        padding: 4px 10px;
-        border-radius: 12px;
+        color: #F1F5F9;
+        letter-spacing: -0.02em;
+        margin-bottom: 0.25rem;
+    }
+    .dashboard-subtitle {
+        font-size: 1.15rem;
         font-weight: 600;
-        font-size: 0.85rem;
-        display: inline-block;
-        border: 1px solid #FCD34D;
-    }}
-    .caption-box {{
-        background-color: #F1F5F9;
-        border-left: 4px solid {core.COLOR_ACCENT_GOLD};
-        padding: 8px 12px;
-        margin-top: 6px;
-        margin-bottom: 14px;
-        border-radius: 0 4px 4px 0;
+        color: #D4AF37;
+        margin-bottom: 0.35rem;
+    }
+    .dashboard-meta {
         font-size: 0.88rem;
-        color: {core.COLOR_TEXT_NAVY};
-    }}
-    .status-banner-signal {{
-        background-color: #FEF3C7;
-        border-left: 6px solid #D97706;
-        padding: 14px 18px;
-        border-radius: 4px;
-        color: #92400E;
+        color: #94A3B8;
+        line-height: 1.5;
+    }
+
+    /* Tab navigation styling */
+    .stTabs [role="tablist"] {
+        gap: 8px;
+        border-bottom: 1px solid #2D3748;
+        padding-bottom: 2px;
+    }
+    .stTabs [role="tab"] {
+        padding: 8px 16px;
+        border-radius: 6px 6px 0 0;
+        font-weight: 500;
+        color: #94A3B8;
+        border: 1px solid transparent;
+        background-color: transparent;
+        transition: all 0.2s ease;
+    }
+    .stTabs [role="tab"]:hover {
+        color: #F1F5F9;
+        background-color: rgba(212, 175, 55, 0.06);
+    }
+    .stTabs [role="tab"][aria-selected="true"] {
+        color: #D4AF37;
+        border-bottom: 2px solid #D4AF37;
         font-weight: 600;
-        font-size: 1.05rem;
-        margin-bottom: 16px;
-    }}
-    .status-banner-ok {{
-        background-color: #D1FAE5;
-        border-left: 6px solid #059669;
+    }
+
+    /* Metric card styling */
+    div[data-testid="stMetric"] {
+        background-color: #1A2234;
+        border: 1px solid #2D3748;
+        border-radius: 8px;
+        padding: 12px 16px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+    }
+    div[data-testid="stMetric"] label {
+        font-size: 0.78rem;
+        font-weight: 500;
+        color: #94A3B8;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+    }
+    div[data-testid="stMetric"] [data-testid="stMetricValue"] {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #F1F5F9;
+    }
+
+    /* Status banner styling (calm colors, non-alarming) */
+    .status-banner-ok {
+        background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(6, 78, 59, 0.25));
+        border: 1px solid #059669;
+        border-left: 5px solid #10B981;
         padding: 14px 18px;
-        border-radius: 4px;
-        color: #065F46;
-        font-weight: 600;
-        font-size: 1.05rem;
+        border-radius: 8px;
+        color: #A7F3D0;
+        font-size: 0.98rem;
+        font-weight: 500;
+        margin-bottom: 18px;
+    }
+    .status-banner-signal {
+        background: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(120, 53, 15, 0.25));
+        border: 1px solid #D97706;
+        border-left: 5px solid #F59E0B;
+        padding: 14px 18px;
+        border-radius: 8px;
+        color: #FDE68A;
+        font-size: 0.98rem;
+        font-weight: 500;
+        margin-bottom: 18px;
+    }
+    .status-banner-nodata {
+        background: linear-gradient(135deg, rgba(100, 116, 139, 0.12), rgba(30, 41, 59, 0.35));
+        border: 1px solid #475569;
+        border-left: 5px solid #64748B;
+        padding: 14px 18px;
+        border-radius: 8px;
+        color: #CBD5E1;
+        font-size: 0.98rem;
+        font-weight: 500;
+        margin-bottom: 18px;
+    }
+
+    /* Takeaway / Caption Box */
+    .caption-box {
+        background-color: #1A2234;
+        border: 1px solid #2D3748;
+        border-left: 4px solid #D4AF37;
+        padding: 12px 16px;
+        margin-top: 14px;
         margin-bottom: 16px;
-    }}
+        border-radius: 0 8px 8px 0;
+        font-size: 0.9rem;
+        line-height: 1.5;
+        color: #CBD5E1;
+    }
+
+    /* Dataframe container rounded border */
+    [data-testid="stDataFrame"] {
+        border-radius: 8px;
+        overflow: hidden;
+        border: 1px solid #2D3748;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .block-container {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+        .dashboard-title {
+            font-size: 1.6rem;
+        }
+    }
     </style>
     """,
     unsafe_allow_html=True,
@@ -112,7 +210,7 @@ df_clean, df_ddr, df_trades = get_data()
 # -----------------------------------------------------------------------------
 st.sidebar.title("🪙 MCX Gold Intelligence")
 st.sidebar.markdown(
-    f"<span style='color:{core.COLOR_ACCENT_GOLD}; font-weight:bold;'>Gold contract price comparison</span>",
+    "<span style='color:#D4AF37; font-weight:bold;'>Gold contract price comparison</span>",
     unsafe_allow_html=True,
 )
 
@@ -171,9 +269,18 @@ st.sidebar.info(
 )
 
 # Header
-st.title("Commodity Derivatives Intelligence")
 st.markdown(
-    f"Comparing **GOLDM (100g, 995)** with **GOLDTEN (10g)**, **GOLDGUINEA (8g)**, and **GOLDPETAL (1g)** (all 999 purity) on MCX."
+    """
+    <div class="dashboard-header">
+        <div class="dashboard-title">🪙 Commodity Derivatives Intelligence</div>
+        <div class="dashboard-subtitle">Gold contract price comparison</div>
+        <div class="dashboard-meta">
+            Replay on saved MCX data, 3 Aug to 1 Oct 2026 &nbsp;•&nbsp; 
+            Comparing <b>GOLDM (100g, 995)</b> with <b>GOLDTEN (10g)</b>, <b>GOLDGUINEA (8g)</b>, and <b>GOLDPETAL (1g)</b> (all 999 purity) on MCX
+        </div>
+    </div>
+    """,
+    unsafe_allow_html=True,
 )
 
 # -----------------------------------------------------------------------------
@@ -202,19 +309,33 @@ with tabs[0]:
         cutoff_days=cutoff_days,
     )
 
+    # Key metrics strip at top of tab
+    m1, m2, m3, m4 = st.columns(4)
+    with m1:
+        st.metric("As-of Date", as_of_ts.strftime('%d-%b-%Y'))
+    with m2:
+        status_label = "Signal" if banner["code"] == "SIGNAL" else ("No Data" if banner["code"] == "NO_DATA" else "Normal")
+        st.metric("Market Status", status_label)
+    with m3:
+        st.metric("Assumed Cost", f"{break_even_pct:.2f}%")
+    with m4:
+        st.metric("Normal Window", f"{rolling_window} Days")
+
+    st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
+
     if banner["code"] == "SIGNAL":
         st.markdown(
-            f"<div class='status-banner-signal'>🟠 {banner['message']}</div>",
+            f"<div class='status-banner-signal'>⚡ {banner['message']}</div>",
             unsafe_allow_html=True,
         )
     elif banner["code"] == "NO_DATA":
         st.markdown(
-            f"<div class='status-banner-signal' style='background-color:#E2E8F0; border-left:6px solid #64748B; color:#334155;'>ℹ️ {banner['message']} — The selected date has no traded bhavcopy records (weekend or exchange holiday).</div>",
+            f"<div class='status-banner-nodata'>ℹ️ {banner['message']} — The selected date has no traded bhavcopy records (weekend or exchange holiday).</div>",
             unsafe_allow_html=True,
         )
     else:
         st.markdown(
-            f"<div class='status-banner-ok'>🟢 {banner['message']} — All active contracts are within normal relative ranges.</div>",
+            f"<div class='status-banner-ok'>✓ {banner['message']} — All active contracts are within normal relative ranges.</div>",
             unsafe_allow_html=True,
         )
 
@@ -244,16 +365,11 @@ with tabs[0]:
                 format_dict["Reference Used"] = lambda s: str(s)
 
             styler = tbl.style.format(format_dict)
+            status_style_fn = lambda v: "color: #F59E0B; font-weight: 600;" if "Signal" in str(v) else "color: #10B981;"
             if hasattr(styler, "map"):
-                styler = styler.map(
-                    lambda v: "color: #b91c1c; font-weight: bold;" if "Signal" in str(v) else "",
-                    subset=["Status"]
-                )
+                styler = styler.map(status_style_fn, subset=["Status"])
             else:
-                styler = styler.applymap(
-                    lambda v: "color: #b91c1c; font-weight: bold;" if "Signal" in str(v) else "",
-                    subset=["Status"]
-                )
+                styler = styler.applymap(status_style_fn, subset=["Status"])
             st.dataframe(
                 styler,
                 use_container_width=True,
@@ -294,6 +410,19 @@ with tabs[1]:
         cutoff_days=cutoff_days,
     )
 
+    # Key metrics strip at top of tab
+    m1, m2, m3, m4 = st.columns(4)
+    with m1:
+        st.metric("Monitored Expiry", selected_exp_str)
+    with m2:
+        st.metric("Benchmark", ref_desc.split(" ")[0] if ref_desc else "GOLDM")
+    with m3:
+        st.metric("Normal Window", f"{rolling_window} Days")
+    with m4:
+        st.metric("Cost Band", f"±{break_even_pct:.2f}%")
+
+    st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
+
     if gaps_df.empty:
         st.warning(f"No traded gap records available for expiry {selected_exp_str} up to {as_of_ts.strftime('%Y-%m-%d')}.")
     else:
@@ -303,18 +432,19 @@ with tabs[1]:
         fig = go.Figure()
 
         colors = {
-            "GOLDTEN": "#2563EB",     # Blue
-            "GOLDGUINEA": "#059669",   # Green
-            "GOLDPETAL": "#DC2626",    # Red
+            "GOLDTEN": "#60A5FA",     # Soft bright blue
+            "GOLDGUINEA": "#34D399",   # Fresh emerald green
+            "GOLDPETAL": "#F87171",    # Soft coral red
         }
 
         # Add zero line
         fig.add_hline(
             y=0,
             line_dash="dash",
-            line_color="#475569",
+            line_color="#94A3B8",
             annotation_text="Benchmark (0.0%)",
             annotation_position="bottom right",
+            annotation_font=dict(color="#94A3B8", size=10),
         )
 
         for sym in gaps_df["symbol"].unique():
@@ -324,7 +454,7 @@ with tabs[1]:
                 y=sub["gap_pct"],
                 mode="lines+markers",
                 name=f"{sym} Gap (%)",
-                line=dict(color=colors.get(sym, "#6B7280"), width=2),
+                line=dict(color=colors.get(sym, "#A78BFA"), width=2),
                 marker=dict(size=4),
             ))
 
@@ -343,19 +473,35 @@ with tabs[1]:
                 mode="lines",
                 line=dict(width=0),
                 fill="tonexty",
-                fillcolor="rgba(201, 138, 27, 0.12)",
+                fillcolor="rgba(212, 175, 55, 0.16)",
                 name=f"{sym} Normal Band (±{break_even_pct}%)",
             ))
 
         fig.update_layout(
-            title=f"Price Gap (%) vs Reference for Expiry {selected_exp_str}",
+            title=dict(
+                text=f"Price Gap (%) vs Reference for Expiry {selected_exp_str}",
+                font=dict(size=14, color="#F1F5F9"),
+            ),
             xaxis_title="Trading Date",
             yaxis_title="Price Gap (%)",
-            template="plotly_white",
+            template="plotly_dark",
+            paper_bgcolor="#1A2234",
+            plot_bgcolor="#1A2234",
             hovermode="x unified",
+            height=430,
+            font=dict(family="sans serif", color="#F1F5F9", size=11),
             margin=dict(l=40, r=40, t=50, b=40),
-            legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
+            legend=dict(
+                orientation="h",
+                yanchor="bottom",
+                y=1.02,
+                xanchor="right",
+                x=1,
+                font=dict(size=10),
+            ),
         )
+        fig.update_xaxes(showgrid=True, gridwidth=1, gridcolor="#2D3748")
+        fig.update_yaxes(showgrid=True, gridwidth=1, gridcolor="#2D3748")
 
         st.plotly_chart(fig, use_container_width=True)
 
@@ -378,6 +524,19 @@ with tabs[2]:
         if df_conv.empty:
             st.info("No matching settlement records found.")
         else:
+            # Key metrics strip at top of tab
+            m1, m2, m3, m4 = st.columns(4)
+            with m1:
+                st.metric("Expiries Analyzed", "3 Expiries")
+            with m2:
+                st.metric("DDR Relative Range", "0.00% to -0.26%")
+            with m3:
+                st.metric("Last Close vs DDR", "+0.44% to +1.02%")
+            with m4:
+                st.metric("Settlement Basis", "Exchange Spot Rate")
+
+            st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
+
             col_l, col_r = st.columns([1, 1])
 
             with col_l:
@@ -421,9 +580,26 @@ with tabs[2]:
                     barmode="group",
                     title="Settlement Difference vs DDR (%)",
                     labels={"symbol": "Contract", "diff_pct": "Difference vs DDR (%)", "expiry_date": "Expiry"},
-                    color_discrete_sequence=[core.COLOR_ACCENT_GOLD, "#2563EB"],
+                    color_discrete_sequence=["#D4AF37", "#60A5FA"],
                 )
-                fig_bar.update_layout(template="plotly_white", margin=dict(l=30, r=30, t=50, b=30))
+                fig_bar.update_layout(
+                    template="plotly_dark",
+                    paper_bgcolor="#1A2234",
+                    plot_bgcolor="#1A2234",
+                    height=420,
+                    font=dict(family="sans serif", color="#F1F5F9", size=11),
+                    margin=dict(l=30, r=30, t=50, b=30),
+                    legend=dict(
+                        orientation="h",
+                        yanchor="bottom",
+                        y=1.02,
+                        xanchor="right",
+                        x=1,
+                        font=dict(size=10),
+                    ),
+                )
+                fig_bar.update_xaxes(showgrid=True, gridwidth=1, gridcolor="#2D3748")
+                fig_bar.update_yaxes(showgrid=True, gridwidth=1, gridcolor="#2D3748")
                 st.plotly_chart(fig_bar, use_container_width=True)
 
             st.info(
@@ -445,6 +621,19 @@ with tabs[3]:
     if df_trades.empty:
         st.warning("⚠️ Backtest results file `results_bt/trades.csv` not found.")
     else:
+        # Key metrics strip at top of tab
+        m1, m2, m3, m4 = st.columns(4)
+        with m1:
+            st.metric("Total Trades", "5 Trades")
+        with m2:
+            st.metric("Gross Result", "+₹1,556")
+        with m3:
+            st.metric("Friction (Fees & Slippage)", "-₹1,633")
+        with m4:
+            st.metric("Net Result", "-₹77")
+
+        st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
+
         # Determine period classification
         df_show_trades = df_trades.copy()
         if "period" not in df_show_trades.columns:
@@ -508,6 +697,19 @@ with tabs[4]:
 
     contracts_info, df_vol = core.compute_calendar_timeline(df_clean, df_trades)
 
+    # Key metrics strip at top of tab
+    m1, m2, m3, m4 = st.columns(4)
+    with m1:
+        st.metric("Turnover Leader", "GOLDM (~99%)")
+    with m2:
+        st.metric("Active Contracts", "4 Variants")
+    with m3:
+        st.metric("Tender Period", "Last 3 Trading Days")
+    with m4:
+        st.metric("Compulsory Margin", "8.34% per day")
+
+    st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
+
     if contracts_info:
         st.markdown("#### Contract Lifecycle Timeline")
 
@@ -526,14 +728,30 @@ with tabs[4]:
             y="Contract",
             color="Stage",
             color_discrete_map={
-                "Active Trading": "#94A3B8",
-                "No New Entries (Last 10d)": "#F59E0B",
-                "Tender Period (3d, 8.34% Margin)": "#DC2626",
+                "Active Trading": "#64748B",
+                "No New Entries (Last 10d)": "#D4AF37",
+                "Tender Period (3d, 8.34% Margin)": "#F87171",
             },
             title="Contract Lifecycle & Regulatory Restrictions",
         )
-        fig_timeline.update_yaxes(autorange="reversed")
-        fig_timeline.update_layout(template="plotly_white", margin=dict(l=40, r=40, t=50, b=40))
+        fig_timeline.update_yaxes(autorange="reversed", showgrid=True, gridwidth=1, gridcolor="#2D3748")
+        fig_timeline.update_xaxes(showgrid=True, gridwidth=1, gridcolor="#2D3748")
+        fig_timeline.update_layout(
+            template="plotly_dark",
+            paper_bgcolor="#1A2234",
+            plot_bgcolor="#1A2234",
+            height=360,
+            font=dict(family="sans serif", color="#F1F5F9", size=11),
+            margin=dict(l=40, r=40, t=50, b=40),
+            legend=dict(
+                orientation="h",
+                yanchor="bottom",
+                y=1.02,
+                xanchor="right",
+                x=1,
+                font=dict(size=10),
+            ),
+        )
         st.plotly_chart(fig_timeline, use_container_width=True)
 
         # Show note for estimated tender period on running contracts
@@ -547,16 +765,11 @@ with tabs[4]:
             "Avg Daily Volume (g)": "{:,.1f} g",
             "Avg Daily Volume (kg)": "{:,.2f} kg",
         })
+        vol_style_fn = lambda v: "color: #F59E0B; font-weight: 600;" if "Thin" in str(v) else ""
         if hasattr(vol_styler, "map"):
-            vol_styler = vol_styler.map(
-                lambda v: "color: #b91c1c; font-weight: bold;" if "Thin" in str(v) else "",
-                subset=["Liquidity Flag"]
-            )
+            vol_styler = vol_styler.map(vol_style_fn, subset=["Liquidity Flag"])
         else:
-            vol_styler = vol_styler.applymap(
-                lambda v: "color: #b91c1c; font-weight: bold;" if "Thin" in str(v) else "",
-                subset=["Liquidity Flag"]
-            )
+            vol_styler = vol_styler.applymap(vol_style_fn, subset=["Liquidity Flag"])
         st.dataframe(
             vol_styler,
             use_container_width=True,
@@ -574,6 +787,19 @@ with tabs[4]:
 # =============================================================================
 with tabs[5]:
     st.subheader("Methodology, Assumptions & Contract Specifications")
+
+    # Key metrics strip at top of tab
+    m1, m2, m3, m4 = st.columns(4)
+    with m1:
+        st.metric("Purity Conversion", "995 → 999 (× 999/995)")
+    with m2:
+        st.metric("Normal Window", "10-Day Lagged Mean")
+    with m3:
+        st.metric("Assumed Cost", "0.22% Round-Trip")
+    with m4:
+        st.metric("Expiry Cutoff", "≤ 10 Calendar Days")
+
+    st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
 
     st.markdown("""
     ### 🔬 Calculation Methodology
@@ -603,9 +829,9 @@ with tabs[5]:
     st.markdown("### ⚠️ Analytical Assumptions & Limitations")
     st.markdown("""
     * **Assumed Trading Friction**: Baseline round-trip cost assumed at **0.22%** (covering CTT, exchange turnover fees, SEBI charges, stamp duty, and brokerage).
-    * **Slippage**: Market impact and bid-ask slippage are assumed at benchmark rates; real fills depend on live limit book depth.
+    * **Slippage**: Market impact and bid-ask slippage are assumed at benchmark rates; real fills depend on order book depth.
     * **Due Date Rates (DDR)**: Hand-collected from official MCX Bhavcopy reports; DDR represents a polled spot settlement benchmark, not an executable quote.
-    * **Settlement Prices vs Execution**: Exchange Bhavcopy prices are official daily settlement figures, not live quotes.
+    * **Settlement Prices vs Execution**: Exchange Bhavcopy prices are official daily settlement figures, not intraday quotes.
     * **Sample Limitation**: Analysis is evaluated on an empirical sample of 3 historical contract expiries.
     * **Physical Delivery Omission**: Compulsory physical delivery costs, vaulting fees, and making charges are not modelled in trading P&L.
     * **Data Source**: Daily Bhavcopy published by the Multi Commodity Exchange of India (MCX).
