@@ -7,11 +7,8 @@ Run with: streamlit run app.py
 import os
 import sys
 
-# Ensure repository root is on sys.path whether run from root or inside subdirectories
+# Ensure repository root is on sys.path
 _CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
-_PARENT_DIR = os.path.abspath(os.path.join(_CURRENT_DIR, ".."))
-if _PARENT_DIR not in sys.path:
-    sys.path.insert(0, _PARENT_DIR)
 if _CURRENT_DIR not in sys.path:
     sys.path.insert(0, _CURRENT_DIR)
 
@@ -215,7 +212,7 @@ st.sidebar.markdown(
 )
 
 if df_clean.empty:
-    st.error("⚠️ Clean dataset missing: `out/gold_futures_clean.csv`. Run `preprocess.py` first.")
+    st.error("⚠️ Clean dataset missing: `out/gold_futures_clean.csv`. Run `scripts/preprocess.py` first.")
     st.stop()
 
 # Available trading dates for replay
@@ -378,7 +375,7 @@ with tabs[0]:
             st.markdown("---")
 
     st.markdown(
-        "<div class='caption-box'><b>Takeaway:</b> Provides an immediate pre-trade check of whether retail gold contracts are trading at a fair relative value or whether an actionable spread anomaly has emerged.</div>",
+        "<div class='caption-box'><b>Takeaway:</b> Provides an immediate pre-trade check of whether retail gold contracts are trading at a fair relative value or whether a gap bigger than the assumed cost has emerged.</div>",
         unsafe_allow_html=True,
     )
 
@@ -525,9 +522,11 @@ with tabs[2]:
             st.info("No matching settlement records found.")
         else:
             # Key metrics strip at top of tab
+            n_exp = df_conv["expiry_date"].nunique()
+            n_contracts = len(df_conv)
             m1, m2, m3, m4 = st.columns(4)
             with m1:
-                st.metric("Expiries Analyzed", "3 Expiries")
+                st.metric("Expiries Analyzed", f"{n_exp} Expiries ({n_contracts} contracts)")
             with m2:
                 st.metric("DDR Relative Range", "0.00% to -0.26%")
             with m3:
@@ -740,7 +739,7 @@ with tabs[4]:
             template="plotly_dark",
             paper_bgcolor="#1A2234",
             plot_bgcolor="#1A2234",
-            height=360,
+            height=460,
             font=dict(family="sans serif", color="#F1F5F9", size=11),
             margin=dict(l=40, r=40, t=50, b=40),
             legend=dict(
